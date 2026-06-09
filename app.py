@@ -317,6 +317,14 @@ with st.sidebar:
         </span>
     </div>
     """, unsafe_allow_html=True)
+
+ # Analytics Visitor Counter Badge
+    st.markdown("""
+        <div style="text-align: center; margin-top: 1rem;">
+            <img src="https://hit.yhype.me/github/profile/AyushmaanSingh941?bg_color=161B22&count_color=00C8C8&title=Global+Users&title_color=8B949E" alt="Hits Badge"/>
+        </div>
+    """, unsafe_allow_html=True)
+ 
  
     # ── File uploader ──────────────────────────────────────────────────────────
     st.markdown('<div class="section-header">Input File</div>', unsafe_allow_html=True)
