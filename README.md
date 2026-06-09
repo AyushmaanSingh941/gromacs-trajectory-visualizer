@@ -62,7 +62,14 @@ Below is an example of the dashboard analyzing a GROMACS trajectory:
 
 ![GROMACS Trajectory Visualizer Dashboard](docs/dashboard-demo.png)
 
-> **Note**: To add a screenshot, run the app with a sample `.xvg` file, capture the dashboard, and save it as `docs/dashboard-demo.png` in the repository.
+### Dashboard Features:
+- **Metric Cards** (top): Frame count, time range, mean/min/max values
+- **Interactive Plotly Chart** (center): Multi-series trajectory visualization with hover tooltips
+- **Raw Data Table** (bottom left): Full dataset with scientific notation
+- **Descriptive Statistics** (bottom right): Statistical summary for quick insights
+- **Sidebar Controls**: File upload, chart type, markers, and downsampling options
+
+See [docs/dashboard-demo.md](docs/dashboard-demo.md) for detailed feature descriptions.
 
 ## Example Workflow
 
