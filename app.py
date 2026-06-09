@@ -479,6 +479,17 @@ if uploaded_file is None:
 # Read the uploaded file into bytes. We do this once and pass bytes to our
 # cached function so Streamlit can hash the content and cache effectively.
 file_bytes = uploaded_file.read()
+
+# --- TRACK FILE UPLOAD EVENT ---
+components.html(
+    """
+    <script>
+        window.parent.umami.track('Data_File_Parsed');
+    </script>
+    """,
+    height=0,
+    width=0,
+)
  
 # Show a spinner while parsing (for large files, this may take a moment)
 with st.spinner("Parsing file…"):
