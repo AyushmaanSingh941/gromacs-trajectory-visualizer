@@ -2,14 +2,17 @@
 
 ## Overview
 
-**GROMACS Trajectory Visualizer** is an interactive Streamlit dashboard for parsing and analyzing GROMACS molecular dynamics simulation output files. Upload a `.xvg` trajectory file, and the app automatically extracts, parses, and visualizes your simulation data with an intuitive interface. Explore multiple data series, apply downsampling for large datasets, and export results as CSV—all without writing a single line of code.
+**GROMACS Trajectory Visualizer** is an interactive Streamlit dashboard for parsing and analyzing GROMACS molecular dynamics simulation output files. Upload a `.xvg` trajectory file, and the application automatically parses the data, displays it with interactive Plotly charts, and provides statistical summaries for quick analysis.
+
+The tool bridges the gap between raw GROMACS output and visual analysis, reducing the learning curve for scientists new to trajectory visualization while providing experienced researchers with rapid data exploration capabilities.
 
 ## System Requirements
 
 - **Python**: 3.8 or higher
 - **Operating System**: Windows, macOS, or Linux
-- **RAM**: Minimum 512 MB (recommended 2+ GB for large trajectories)
+- **RAM**: Minimum 512 MB (recommended 2+ GB for large trajectories with >100k frames)
 - **Disk Space**: ~500 MB for dependencies
+- **Browser**: Modern web browser (Chrome, Firefox, Safari, Edge)
 
 ## Quick Start Guide
 
@@ -39,22 +42,22 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Your browser will open to `http://localhost:8501` displaying the dashboard.
+Your browser will automatically open to `http://localhost:8501` displaying the dashboard.
 
 ### 5. Upload and Analyze
 - Click **"Upload a GROMACS .xvg file"** in the sidebar
 - Select your `.xvg` or `.txt` trajectory file
-- Use the **Chart Options** to customize visualization (Line/Scatter/Area, markers, downsampling)
+- Use the **Chart Options** to customize visualization (chart type, markers, downsampling)
 - View statistics, raw data table, and export your parsed results as CSV
 
 ## Features
 
-- ✨ **Instant Visualization**: Beautiful, interactive Plotly charts with dark theme
+- ✨ **Instant Visualization**: Interactive Plotly charts with optimized dark theme for scientific data
 - 📊 **Multi-Series Support**: Plot multiple trajectories or energy components side-by-side
 - 🎛️ **Real-Time Controls**: Toggle markers, switch chart types, downsample data for fast rendering
 - 📋 **Data Export**: Download parsed data as CSV for external analysis
 - 🧬 **GROMACS Native**: Automatically parses `@` and `#` header lines; supports standard `.xvg` format
-- ⚡ **High Performance**: Vectorized parsing with NumPy for handling large files
+- ⚡ **High Performance**: Vectorized parsing with NumPy for handling trajectories with tens of thousands of frames
 
 ## Demo
 
@@ -108,6 +111,21 @@ streamlit run app.py
 | numpy    | 1.26.4  | Numerical computing              |
 | plotly   | 5.19.0  | Interactive visualization        |
 
+## Technical Details
+
+### Parsing Strategy
+The application uses a robust two-stage parsing approach:
+1. **Header filtering**: Skips lines beginning with `#` (comments) and `@` (plot directives)
+2. **Vectorized parsing**: Leverages NumPy for efficient numerical data extraction, which is significantly faster than Python loops for large files
+
+### Performance Optimization
+For trajectories exceeding 50,000 frames, the downsampling feature (accessible via the "Display every Nth frame" slider) reduces rendering latency without losing statistical accuracy on the full dataset.
+
+### Color Scheme
+The interface uses a carefully selected color palette designed for clarity on dark backgrounds and accessibility for colorblind users:
+- Teal (#00C8C8) for primary accent and first data series
+- Warm orange, purple, green, amber, and blue for additional series
+
 ## Troubleshooting
 
 ### "Module not found" errors
@@ -118,10 +136,17 @@ pip install -r requirements.txt
 ```
 
 ### Slow rendering with large files
-Use the **"Display every Nth frame"** slider in the sidebar to downsample data. Set to 5 or higher for files with >50k frames.
+Use the **"Display every Nth frame"** slider in the sidebar to downsample data. Set to 5 or higher for files with >50k frames. The full dataset is still used for statistics calculations.
 
 ### File upload fails
-Verify your file is a valid `.xvg` or `.txt` with numeric data. Header lines must start with `#` or `@`.
+Verify your file is a valid `.xvg` or `.txt` with numeric data. Header lines must start with `#` or `@`. Ensure there are no special characters or corrupted lines in the data section.
+
+### Application crashes on startup
+Clear the Streamlit cache:
+```bash
+rm -rf ~/.streamlit/cache
+streamlit run app.py --logger.level=debug
+```
 
 ## License
 
@@ -129,17 +154,29 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 ## Contributing
 
-Contributions are welcome! Please:
+Contributions are welcome! To contribute:
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m "Add your feature"`)
+3. Make your changes with clear, descriptive commit messages
 4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
+5. Open a Pull Request with a description of your changes
+
+## Citation
+
+If you use this tool in your research, please cite it as:
+
+```
+Singh, A. (2026). GROMACS Trajectory Visualizer: An Interactive Dashboard for Molecular Dynamics Analysis. 
+Available at: https://github.com/AyushmaanSingh941/gromacs-trajectory-visualizer
+```
 
 ## Contact & Support
 
-For questions or issues, please open a [GitHub Issue](https://github.com/AyushmaanSingh941/gromacs-trajectory-visualizer/issues).
+For questions, bug reports, or feature requests, please open a [GitHub Issue](https://github.com/AyushmaanSingh941/gromacs-trajectory-visualizer/issues).
+
+For collaboration inquiries, reach out directly through GitHub.
 
 ---
 
-**Built with ❤️ for molecular dynamics visualization**
+**Built for molecular dynamics researchers and students seeking efficient trajectory analysis and visualization.**
