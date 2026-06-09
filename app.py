@@ -2,7 +2,6 @@
 # GROMACS Trajectory Visualizer
 # app.py — A Streamlit dashboard for parsing and visualizing GROMACS .xvg files
 #
-# Author:  Built for you by Claude (Anthropic)
 # Purpose: Upload a GROMACS output file (.xvg), parse the numerical data,
 #          and explore it interactively with a Plotly chart.
 # =============================================================================
@@ -211,21 +210,20 @@ def parse_gromacs_xvg(file_bytes: bytes) -> tuple[pd.DataFrame, list[str], list[
     data_block = "\n".join(data_lines)
     data_io    = io.StringIO(data_block)   # Wrap in a file-like object for numpy
  
-    try:
-        # np.loadtxt reads whitespace-separated numbers into a 2-D array.
-        # dtype=float64 ensures precision for scientific data.
-        array = np.loadtxt(data_io, dtype=np.float64)
-    except ValueError:
-        # If a line has non-numeric content we missed, fall back to pandas
-        # read_csv which is more forgiving. sep='\s+' handles any whitespace.
-        data_io.seek(0)
-        array = pd.read_csv(
-            data_io,
-            sep=r"\s+",
-            header=None,
-            comment=None,
-            on_bad_lines="skip"
-        ).to_numpy(dtype=np.float64)
+   # Ultimate fallback method to handle any weird spacing bugs or trailing spaces
+    clean_rows = []
+    for row in data_lines:
+        vals = row.split()
+        if vals:  # Verify the row isn't empty
+            try:
+                clean_rows.append([float(val) for val in vals])
+            except ValueError:
+                continue  # Skip any corrupted trailing lines safely
+                
+    if not clean_rows:
+        return pd.DataFrame(), metadata_lines, axis_labels
+        
+    array = np.array(clean_rows, dtype=np.float64)
  
     # Handle the case where the file has only a single row of data
     if array.ndim == 1:
