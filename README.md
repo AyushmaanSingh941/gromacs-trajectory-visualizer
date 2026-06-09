@@ -125,7 +125,7 @@ Verify your file is a valid `.xvg` or `.txt` with numeric data. Header lines mus
 
 ## License
 
-[Add your license here, e.g., MIT, GPL-3.0, etc.]
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
