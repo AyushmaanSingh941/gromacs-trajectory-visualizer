@@ -26,15 +26,6 @@ st.set_page_config(
     layout="wide",          # Use the full browser width — better for charts
     initial_sidebar_state="expanded"  # Sidebar is open by default
 )
-# --- PRODUCTION ANALYTICS TRACKER ---
-import streamlit.components.v1 as components
-components.html(
-    """
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="e193d0ee-fb78-44f2-bd5d-91c3c5d063ac"></script>
-    """,
-    height=0,
-    width=0,
-)
  
  
 # --- 3. CUSTOM CSS / THEME INJECTION ------------------------------------------
@@ -479,29 +470,6 @@ if uploaded_file is None:
 # Read the uploaded file into bytes. We do this once and pass bytes to our
 # cached function so Streamlit can hash the content and cache effectively.
 file_bytes = uploaded_file.read()
-
-# --- INDESTRUCTIBLE TRACK FILE UPLOAD EVENT ---
-components.html(
-    f"""
-    <div id="tracker-node" data-umami-event="Data_File_Parsed"></div>
-    <script>
-        (function() {{
-            var script = document.createElement('script');
-            script.defer = true;
-            script.src = 'https://cloud.umami.is/script.js';
-            script.setAttribute('data-website-id', 'e193d0ee-fb78-44f2-bd5d-91c3c5d063ac');
-            document.head.appendChild(script);
-            script.onload = function() {{
-                if (window.umami) {{
-                    window.umami.track('Data_File_Parsed');
-                }}
-            }};
-        }})();
-    </script>
-    """,
-    height=0,
-    width=0,
-)
  
 # Show a spinner while parsing (for large files, this may take a moment)
 with st.spinner("Parsing file…"):
