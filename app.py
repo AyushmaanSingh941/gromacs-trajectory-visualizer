@@ -318,10 +318,10 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
- # Analytics Visitor Counter Badge
+# Analytics Visitor Counter Badge
     st.markdown("""
         <div style="text-align: center; margin-top: 1rem;">
-            <img src="https://hit.yhype.me/github/profile/AyushmaanSingh941?bg_color=161B22&count_color=00C8C8&title=Global+Users&title_color=8B949E" alt="Hits Badge"/>
+            <img src="https://mojocounter.com/q/AyushmaanSingh941-gromacs-viz" alt="Visitor Counter" style="border-radius: 4px; border: 1px solid #21262D;"/>
         </div>
     """, unsafe_allow_html=True)
  
