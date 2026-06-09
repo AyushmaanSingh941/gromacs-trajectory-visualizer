@@ -26,6 +26,15 @@ st.set_page_config(
     layout="wide",          # Use the full browser width — better for charts
     initial_sidebar_state="expanded"  # Sidebar is open by default
 )
+# --- PRODUCTION ANALYTICS TRACKER ---
+import streamlit.components.v1 as components
+components.html(
+    """
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="e193d0ee-fb78-44f2-bd5d-91c3c5d063ac"></script>
+    """,
+    height=0,
+    width=0,
+)
  
  
 # --- 3. CUSTOM CSS / THEME INJECTION ------------------------------------------
