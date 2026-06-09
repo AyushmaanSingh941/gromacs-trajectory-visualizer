@@ -57,7 +57,7 @@ This project addresses that gap by providing an intuitive, interactive web-based
 ## Performance Metrics
 
 | File Size | Data Points | Parse Time | Render Time | Memory Usage |
-|-----------|-------------|-----------|-----------------|------------|
+|-----------|-------------|-----------|-----------------|----------|
 | 100 KB | 1,000 | <50ms | <200ms | ~5 MB |
 | 5 MB | 50,000 | <500ms | <1s | ~50 MB |
 | 50 MB | 500,000 | ~5s | 2-3s (with downsampling) | ~300 MB |
@@ -99,9 +99,9 @@ The application has been tested with:
 
 The repository includes:
 - **README.md**: Comprehensive setup and usage guide with examples
-- **INSTALLATION.md**: Platform-specific installation instructions (Windows, macOS, Linux)
+- **docs/INSTALLATION.md**: Platform-specific installation instructions (Windows, macOS, Linux)
 - **CONTRIBUTING.md**: Guidelines for research transparency in contributions
-- **PUBLICATION.md**: This file, providing research context
+- **docs/PUBLICATION.md**: This file, providing research context
 - **Inline Code Comments**: Extensive documentation of parsing logic and UI design decisions
 
 ## Accessibility & Usability
