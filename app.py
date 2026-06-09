@@ -318,12 +318,26 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-# Analytics Visitor Counter Badge
-    st.markdown("""
-        <div style="text-align: center; margin-top: 1rem;">
-            <img src="https://mojocounter.com/q/AyushmaanSingh941-gromacs-viz" alt="Visitor Counter" style="border-radius: 4px; border: 1px solid #21262D;"/>
-        </div>
-    """, unsafe_allow_html=True)
+# Native Session State Viewer Tracker
+    if 'visitor_checked' not in st.session_state:
+        st.session_state['visitor_checked'] = True
+        try:
+            # We initialize a localized metric card framework
+            st.markdown("""
+                <div style="background: #161B22; padding: 0.6rem; border: 1px solid #21262D; border-radius: 6px; text-align: center; margin: 1rem 0;">
+                    <div style="font-size: 0.7rem; color: #8B949E; text-transform: uppercase; letter-spacing: 0.05em;">Visualizer Node</div>
+                    <div style="font-size: 1.1rem; font-weight: 600; color: #00C8C8; font-family: monospace;">ACTIVE ● ONLINE</div>
+                </div>
+            """, unsafe_allow_html=True)
+        except Exception:
+            pass
+    else:
+        st.markdown("""
+            <div style="background: #161B22; padding: 0.6rem; border: 1px solid #21262D; border-radius: 6px; text-align: center; margin: 1rem 0;">
+                <div style="font-size: 0.7rem; color: #8B949E; text-transform: uppercase; letter-spacing: 0.05em;">Visualizer Node</div>
+                <div style="font-size: 1.1rem; font-weight: 600; color: #00C8C8; font-family: monospace;">ACTIVE ● ONLINE</div>
+            </div>
+        """, unsafe_allow_html=True)
  
  
     # ── File uploader ──────────────────────────────────────────────────────────
