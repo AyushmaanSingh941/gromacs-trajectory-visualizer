@@ -480,11 +480,23 @@ if uploaded_file is None:
 # cached function so Streamlit can hash the content and cache effectively.
 file_bytes = uploaded_file.read()
 
-# --- TRACK FILE UPLOAD EVENT ---
+# --- INDESTRUCTIBLE TRACK FILE UPLOAD EVENT ---
 components.html(
-    """
+    f"""
+    <div id="tracker-node" data-umami-event="Data_File_Parsed"></div>
     <script>
-        window.parent.umami.track('Data_File_Parsed');
+        (function() {{
+            var script = document.createElement('script');
+            script.defer = true;
+            script.src = 'https://cloud.umami.is/script.js';
+            script.setAttribute('data-website-id', 'e193d0ee-fb78-44f2-bd5d-91c3c5d063ac');
+            document.head.appendChild(script);
+            script.onload = function() {{
+                if (window.umami) {{
+                    window.umami.track('Data_File_Parsed');
+                }}
+            }};
+        }})();
     </script>
     """,
     height=0,
