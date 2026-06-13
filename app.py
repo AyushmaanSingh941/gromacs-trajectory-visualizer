@@ -11,6 +11,7 @@
  
 import streamlit as st   # The framework that turns Python into a web app
 import pandas as pd      # Handles our data as a structured table (DataFrame)
+pd.set_option("styler.render.max_elements", 2000000)
 import numpy as np       # Fast numerical operations on arrays
 import plotly.express as px  # Creates beautiful, interactive charts
 import io                # Lets us treat an uploaded file like a file on disk
